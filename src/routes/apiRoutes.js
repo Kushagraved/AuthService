@@ -1,10 +1,13 @@
-const express=require('express');
-const app=express();
-const productRoutes=require('./productRoutes');
+const express = require('express');
+const { register, login, validateToken } = require('../controllers/userController');
 
-app.use('/products',productRoutes);
+const router = express.Router();
+
+router.post('/register', register);
+router.post('/login', login);
+router.post('/validateToken', validateToken);
 
 
 
-module.exports=app;
+module.exports = router;
 
