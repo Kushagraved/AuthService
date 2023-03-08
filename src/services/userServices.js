@@ -32,7 +32,7 @@ const loginService = async (user) => {
     }
   });
   if (!userExits) {
-    throw new HTTPError(400, 'User doesnot exist');
+    throw new HTTPError(400, 'User does not exist');
   }
 
   const isMatch = bcrypt.compareSync(user.password, userExits.password);
@@ -70,8 +70,21 @@ const validateTokenService = async (req) => {
   const decodedResult = jwt.verify(token, process.env.JWT_SECRET);
   return decodedResult.id;
 };
+
+const getUserByIdService = async (id) => {
+  const user = await User.findOne({
+    where : {
+      id
+    }});
+  if (!user) {
+    throw new HTTPError(404, 'User not found');
+  }
+  return user;
+
+};
 module.exports = {
   registerService,
   loginService,
-  validateTokenService
+  validateTokenService,
+  getUserByIdService
 };

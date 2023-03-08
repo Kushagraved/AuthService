@@ -1,10 +1,10 @@
 module.exports = {
   'development': {
     'username': 'postgres',
-    'password': null,
+    'password': 'postgres',
     'database': 'AuthService',
-    'host': '127.0.0.1',
-    'dialect': 'postgres'
+    'host': 'localhost',
+    'dialect': 'postgres',
   },
   'test': {
     'username': 'root',
@@ -19,5 +19,13 @@ module.exports = {
     'database': 'database_production',
     'host': '127.0.0.1',
     'dialect': 'mysql'
+  },
+  'docker': {
+    'username': 'postgres',
+    'password': 'postgres',
+    'database': 'AuthService',
+    'host': 'postgres',
+    'dialect': 'postgres'
   }
+
 };

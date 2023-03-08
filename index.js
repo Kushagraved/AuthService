@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 8000;
 
 
 app.use(express.json());
@@ -20,21 +20,24 @@ app.use('/api', apiRoutes);
 
 
 app.use((error, req, res, next) => {
-  console.log(error);
+  console.log('error',error.message);
   next(error);
 });
 
 app.use((error, req, res, next) => {
   if (error instanceof HTTPError) {
-    return res.status(error.status).json({
+    res.status(error.status).json({
       message: error.message,
-      stack: error.stack
+      success:false
     });
   }
-  res.status(500).json({
-    message: error.message,
-    stack: error.stack
-  });
+  else{
+    res.status(500).json({
+      message: error.message,
+      success:false
+    });
+
+  }
 });
 
 app.listen(port, () => {
